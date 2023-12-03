@@ -21,7 +21,7 @@
             return [
                 "user_id" => User::factory(),
                 "post_id" => Post::factory(),
-                "body"    => fake( "de" )->realText( 250 ),
+                "body"    => fake()->realText( 250 ),
             ];
         }
     }
