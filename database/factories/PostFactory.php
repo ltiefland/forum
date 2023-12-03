@@ -19,8 +19,8 @@
         {
             return [
                 "user_id" => User::factory(),
-                "title"   => str( fake( "de" )->sentence )->beforeLast( '.' )->title(),
-                "body"    => fake( "de" )->realText( 600 ),
+                "title"   => str( fake()->sentence )->beforeLast( '.' )->title(),
+                "body"    => fake()->realText( 600 ),
 
             ];
         }
