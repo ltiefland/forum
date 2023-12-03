@@ -1,23 +1,27 @@
 <?php
 
-namespace Database\Factories;
+    namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
+    use App\Models\User;
+    use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
- */
-class PostFactory extends Factory
-{
     /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
+     * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
      */
-    public function definition(): array
+    class PostFactory extends Factory
     {
-        return [
-            //
-        ];
+        /**
+         * Define the model's default state.
+         *
+         * @return array<string, mixed>
+         */
+        public function definition(): array
+        {
+            return [
+                "user_id" => User::factory(),
+                "title"   => str( fake( "de" )->sentence )->beforeLast( '.' )->title(),
+                "body"    => fake( "de" )->realText( 600 ),
+
+            ];
+        }
     }
-}
