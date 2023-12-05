@@ -11,6 +11,6 @@
         {
             return [
                 "id"=>$this->id,
-            ]
+            ];
         }
     }
