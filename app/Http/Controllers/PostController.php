@@ -13,7 +13,9 @@
          */
         public function index()
         {
-            return inertia( "Posts/Index", [] );
+            return inertia( "Posts/Index", [
+                "posts" => Post::all()
+            ] );
         }
 
         /**
