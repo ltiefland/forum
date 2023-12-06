@@ -15,4 +15,6 @@
 </template>
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
+
+defineProps(["posts"]);
 </script>
