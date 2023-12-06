@@ -1,4 +1,8 @@
 <template>
+
+    <AppLayout>
+        Hello world!
+    </AppLayout>
     <div>
         <h1>Posts</h1>
         <ul>
@@ -10,3 +14,6 @@
         </ul>
     </div>
 </template>
+<script setup>
+import AppLayout from "@/Layouts/AppLayout.vue";
+</script>
