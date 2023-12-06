@@ -27,15 +27,15 @@ const logout = () => {
 };
 const menu= [
     {
-        name:"Dashboard",
+        name: "Dashboard",
         url: route('dashboard'),
-        route:'dashboard',
+        route: 'dashboard',
         when: () =>usePage.props.auth.user,
     },
     {
-        name:"Posts",
+        name: "Posts",
         url: route('posts.index'),
-        route:'posts.index',
+        route: 'posts.index',
     }
 ]
 </script>
