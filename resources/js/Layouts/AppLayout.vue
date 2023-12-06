@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import { Head, Link, router } from '@inertiajs/vue3';
+import {Head, Link, router, usePage} from '@inertiajs/vue3';
 import ApplicationMark from '@/Components/ApplicationMark.vue';
 import Banner from '@/Components/Banner.vue';
 import Dropdown from '@/Components/Dropdown.vue';
@@ -25,6 +25,19 @@ const switchToTeam = (team) => {
 const logout = () => {
     router.post(route('logout'));
 };
+const menu= [
+    {
+        name:"Dashboard",
+        url: route('dashboard'),
+        route:'dashboard',
+        when: () =>usePage.props.auth.user,
+    },
+    {
+        name:"Posts",
+        url: route('posts.index'),
+        route:'posts.index',
+    },
+]
 </script>
 
 <template>
@@ -47,10 +60,15 @@ const logout = () => {
                             </div>
 
                             <!-- Navigation Links -->
-                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                                    Dashboard
-                                </NavLink>
+                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">1
+                                <template v-for="item in menu" :key="item.name">
+                                    <NavLink
+                                        v-if="item.when" ?item.when:true,
+                                        :href="item.url"
+                                        :active="route().current(item.route)">
+                                        {{ item.name }}
+                                    </NavLink>
+                                </template>
                             </div>
                         </div>
 
