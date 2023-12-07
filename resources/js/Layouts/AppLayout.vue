@@ -30,7 +30,7 @@ const menu= [
         name: "Dashboard",
         url: route('dashboard'),
         route: 'dashboard',
-        when: () =>usePage.props.auth.user,
+        when: () =>usePage().props.auth.user,
     },
     {
         name: "Posts",
