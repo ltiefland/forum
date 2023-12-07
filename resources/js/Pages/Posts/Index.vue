@@ -3,8 +3,8 @@
     <AppLayout>
         <Container>
             <h1>Posts</h1>
-            <ul>
-                <li v-for="post in posts" :key="post.id">
+            <ul class="divide-y">
+                <li v-for="post in posts" :key="post.id" class="px-2 py-4">
                     <inertia-link :href="route('posts.show',post.id)">
                         {{ post.title }}
                     </inertia-link>
