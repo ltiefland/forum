@@ -13,7 +13,7 @@
                 "id"         => $this->id,
                 "name"       => $this->name,
                 "email"      => $this->when( $this->id === $request->user()?->id, $this->email ),
-                "updated_at" => $this->udated_at,
+                "updated_at" => $this->updated_at,
                 "created_at" => $this->created_at,
             ];
         }
