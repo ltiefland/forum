@@ -9,15 +9,15 @@
                 <p class="text-sm text-gray-700">
                     Showing
                     {{ ' ' }}
-                    <span class="font-medium">1</span>
+                    <span class="font-medium">{{ meta.from }}</span>
                     {{ ' ' }}
                     to
                     {{ ' ' }}
-                    <span class="font-medium">10</span>
+                    <span class="font-medium">{{ meta.to }}</span>
                     {{ ' ' }}
                     of
                     {{ ' ' }}
-                    <span class="font-medium">97</span>
+                    <span class="font-medium">{{ meta.total }}</span>
                     {{ ' ' }}
                     results
                 </p>
