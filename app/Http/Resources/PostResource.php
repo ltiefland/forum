@@ -11,7 +11,7 @@
         {
             return [
                 "id"         => $this->id,
-                "user"       => UserResource::make( $this->user_id ),
+                "user"       => UserResource::make( $this->user ),
                 "title"      => $this->title,
                 "updated_at" => $this->updated_at,
                 "created_at" => $this->created_at,
