@@ -7,10 +7,12 @@
 
     class UserResource extends JsonResource
     {
-        public function toArray(Request $request):array
+        public function toArray( Request $request ): array
         {
             return [
-                "id"=>$this->id,
+                "id"    => $this->id,
+                "name"  => $this->name,
+                "email" => $this->when( $this->id === $request->user()?->id, $this->email, "" ),
             ];
         }
     }
