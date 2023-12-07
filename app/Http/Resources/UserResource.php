@@ -10,9 +10,11 @@
         public function toArray( Request $request ): array
         {
             return [
-                "id"    => $this->id,
-                "name"  => $this->name,
-                "email" => $this->when( $this->id === $request->user()?->id, $this->email ),
+                "id"         => $this->id,
+                "name"       => $this->name,
+                "email"      => $this->when( $this->id === $request->user()?->id, $this->email ),
+                "updated_at" => $this->udated_at,
+                "created_at" => $this->created_at,
             ];
         }
     }
