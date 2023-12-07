@@ -17,7 +17,7 @@
         public function index(): Response|ResponseFactory
         {
             return inertia( "Posts/Index", [
-                "posts" => PostResource::collection( Post::all() ),
+                "posts" => PostResource::collection( Post::paginate() ),
             ] );
         }
 
