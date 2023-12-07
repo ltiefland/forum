@@ -5,13 +5,15 @@
     use App\Http\Requests\StorePostRequest;
     use App\Http\Requests\UpdatePostRequest;
     use App\Models\Post;
+    use Inertia\Response;
+    use Inertia\ResponseFactory;
 
     class PostController extends Controller
     {
         /**
          * Display a listing of the resource.
          */
-        public function index()
+        public function index(): Response|ResponseFactory
         {
             return inertia( "Posts/Index", [
                 "posts" => Post::all()
