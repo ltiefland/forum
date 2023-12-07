@@ -11,7 +11,7 @@
                 </li>
             </ul>
         </Container>
-        <Pagination/>
+        <Pagination :meta="post.meta"/>
     </AppLayout>
 </template>
 <script setup>
