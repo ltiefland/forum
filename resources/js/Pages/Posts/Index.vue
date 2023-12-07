@@ -6,7 +6,7 @@
             <ul class="divide-y">
                 <li v-for="post in posts" :key="post.id" class="px-2 py-4">
                     <inertia-link :href="route('posts.show',post.id)">
-                        {{ post.title }}
+                        <span class="font-bold text-lg">{{ post.title }}</span>
                     </inertia-link>
                 </li>
             </ul>
