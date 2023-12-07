@@ -1,10 +1,10 @@
 <template>
     <div class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
         <div class="flex flex-1 justify-between sm:hidden">
-            <a href="#"
-               class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Previous</a>
-            <a href="#"
-               class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Next</a>
+            <Link :href="previousUrl"
+               class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Previous</Link>
+            <Link :href="nextUrl"
+               class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">Next</Link>
         </div>
         <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
             <div>
@@ -46,12 +46,11 @@
 <script setup>
 import {ChevronLeftIcon, ChevronRightIcon} from '@heroicons/vue/20/solid'
 import {Link} from "@inertiajs/vue3";
+import {computed} from "vue";
 
-defineProps(["meta"]);
+const props = defineProps(["meta"]);
 
-const items = [
-    {id: 1, title: 'Back End Developer', department: 'Engineering', type: 'Full-time', location: 'Remote'},
-    {id: 2, title: 'Front End Developer', department: 'Engineering', type: 'Full-time', location: 'Remote'},
-    {id: 3, title: 'User Interface Designer', department: 'Design', type: 'Full-time', location: 'Remote'},
-]
+const previousUrl = computed(()=>props.meta.links[0].url);
+const nextUrl = computed(()=>props.meta.links.reverse()[0].url);
+
 </script>
