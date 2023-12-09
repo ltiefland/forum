@@ -20,7 +20,7 @@
             $posts = Post::factory( 200 )->recycle( $users )->create();
             $comments = Comment::factory( 100 )->recycle( $users )->recycle( $posts )->create();
 
-            \App\Models\User::factory()->create( [
+            User::factory()->create( [
                 'name'                      => 'Lars Tiefland',
                 'email'                     => 'ltiefland@gmail.com',
                 'password'                  => '$2y$12$8xRau4u0HaC5Miw8c2HO7Og9742wC0EM.4EAKiX6zR2jnwp2H/nMa',

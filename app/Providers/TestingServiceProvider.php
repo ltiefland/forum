@@ -46,5 +46,10 @@
             {
                 return $this->assertInertia( fn( AssertableInertia $inertia ) => $inertia->hasPaginatedResource( $key, $resource ) );
             } );
+
+            TestResponse::macro( 'assertComponent', function ( string $component )
+            {
+                return $this->assertInertia( fn( AssertableInertia $inertia ) => $inertia->component( $component, true ) );
+            } );
         }
     }

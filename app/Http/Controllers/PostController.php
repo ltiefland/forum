@@ -6,6 +6,7 @@
     use App\Http\Requests\UpdatePostRequest;
     use App\Http\Resources\PostResource;
     use App\Models\Post;
+    use Inertia\Inertia;
     use Inertia\Response;
     use Inertia\ResponseFactory;
 
@@ -17,7 +18,7 @@
         public function index(): Response|ResponseFactory
         {
             return inertia( "Posts/Index", [
-                "posts" => PostResource::collection( Post::latest()->latest('id')->paginate() ),
+                "posts" => PostResource::collection( Post::latest()->latest( 'id' )->paginate() ),
             ] );
         }
 
@@ -42,7 +43,10 @@
          */
         public function show( Post $post )
         {
-            //
+            $post->load('user');
+            return inertia( 'Posts/Show', [
+                "post" => PostResource::make( $post ),
+            ] );
         }
 
         /**
