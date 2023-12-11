@@ -5,9 +5,11 @@
             <h1>Posts</h1>
             <ul class="divide-y">
                 <li v-for="post in posts.data" :key="post.id" class="px-2 py-4">
-                    <inertia-link :href="route('posts.show',post.id)">
+                    <Link :href="route('posts.show',post.id)">
                         <span class="font-bold text-lg">{{ post.title }}</span>
-                    </inertia-link>
+                        <span class="block mt-1 text-sm text-gray-600">{{ formattedDate[post.id] }} ago by {{ post.user.name }}</span>
+                        <span>{{ post.teaser }}</span>
+                    </Link>
                 </li>
             </ul>
         </Container>
@@ -18,6 +20,13 @@
 import AppLayout from "@/Layouts/AppLayout.vue";
 import Container from "@/Components/Container.vue";
 import Pagination from "@/Components/Pagination.vue";
+import {Head, Link, router, usePage} from '@inertiajs/vue3';
+import {computed} from "vue";
+import {formatDistance, parseISO} from "date-fns";
 
-defineProps(["posts"]);
+const props = defineProps(["posts"]);
+let formattedDate=[];
+Array.from(props.posts.data).forEach((post)=>{
+    formattedDate[post.id]=formatDistance(parseISO(post.created_at),new Date());
+});
 </script>

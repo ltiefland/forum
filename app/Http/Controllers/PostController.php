@@ -18,7 +18,7 @@
         public function index(): Response|ResponseFactory
         {
             return inertia( "Posts/Index", [
-                "posts" => PostResource::collection( Post::latest()->latest( 'id' )->paginate() ),
+                "posts" => PostResource::collection( Post::with('user')->latest()->latest( 'id' )->paginate() ),
             ] );
         }
 
