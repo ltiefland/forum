@@ -25,10 +25,6 @@ import {computed} from "vue";
 import {formatDistance, parseISO} from "date-fns";
 
 const props = defineProps(["posts"]);
-/*let formattedDate=[];
-Array.from(props.posts.data).forEach((post)=>{
-    formattedDate[post.id]=formatDistance(parseISO(post.created_at),new Date());
-});*/
 const formattedDate = (date) => {
     return formatDistance(parseISO(date),new Date())
 }
