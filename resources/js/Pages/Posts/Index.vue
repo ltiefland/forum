@@ -4,10 +4,10 @@
         <Container>
             <h1>Posts</h1>
             <ul class="divide-y">
-                <li v-for="post in posts.data" :key="post.id" class="px-2 py-4">
-                    <Link :href="route('posts.show',post.id)">
-                        <span class="font-bold text-lg">{{ post.title }}</span>
-                        <span class="block mt-1 text-sm text-gray-600">{{ formattedDate[post.id] }} ago by {{ post.user.name }}</span>
+                <li v-for="post in posts.data" :key="post.id">
+                    <Link :href="route('posts.show',post.id)" class="group block px-2 py-4">
+                        <span class="font-bold text-lg  group-hover:text-indigo-500">{{ post.title }}</span>
+                        <span class="block pt-1 text-sm text-gray-600" >{{ formattedDate(post) }} ago by {{ post.user.name }}</span>
                         <span>{{ post.teaser }}</span>
                     </Link>
                 </li>
@@ -25,8 +25,11 @@ import {computed} from "vue";
 import {formatDistance, parseISO} from "date-fns";
 
 const props = defineProps(["posts"]);
-let formattedDate=[];
+/*let formattedDate=[];
 Array.from(props.posts.data).forEach((post)=>{
     formattedDate[post.id]=formatDistance(parseISO(post.created_at),new Date());
-});
+});*/
+const formattedDate = (post) => {
+    return formatDistance(parseISO(post.created_at),new Date())
+}
 </script>
