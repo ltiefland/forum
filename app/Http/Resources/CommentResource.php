@@ -11,8 +11,8 @@
         {
             return [
                 "id"         => $this->id,
-                "user"       => UserResource::make( $this->user ),
-                "post"       => PostResource::make( $this->post ),
+                "user"       => $this->whenLoaded( "user", fn() => UserResource::make( $this->user ) ),
+                "post"       => $this->whenLoaded( 'post', fn() => PostResource::make( $this->post ) ),
                 "updated_at" => $this->updated_at,
                 "created_at" => $this->created_at,
                 "body"       => $this->body,

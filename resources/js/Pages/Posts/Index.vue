@@ -23,9 +23,10 @@ import Pagination from "@/Components/Pagination.vue";
 import {Head, Link, router, usePage} from '@inertiajs/vue3';
 import {computed} from "vue";
 import {formatDistance, parseISO} from "date-fns";
+import {relativeDate} from "@/utilities/date.js";
 
 const props = defineProps(["posts"]);
 const formattedDate = (date) => {
-    return formatDistance(parseISO(date),new Date())
+    return relativeDate(date)
 }
 </script>

@@ -4,6 +4,7 @@
 
     use App\Http\Requests\StorePostRequest;
     use App\Http\Requests\UpdatePostRequest;
+    use App\Http\Resources\CommentResource;
     use App\Http\Resources\PostResource;
     use App\Models\Post;
     use Inertia\Inertia;
@@ -18,7 +19,7 @@
         public function index(): Response|ResponseFactory
         {
             return inertia( "Posts/Index", [
-                "posts" => PostResource::collection( Post::with('user')->latest()->latest( 'id' )->paginate() ),
+                "posts" => PostResource::collection( Post::with( 'user' )->latest()->latest( 'id' )->paginate() ),
             ] );
         }
 
@@ -43,9 +44,10 @@
          */
         public function show( Post $post )
         {
-            $post->load('user');
+            $post->load( 'user' );
             return inertia( 'Posts/Show', [
-                "post" => PostResource::make( $post ),
+                "post"     => PostResource::make( $post ),
+                "comments" => CommentResource::collection( $post->comments()->with('user')->latest()->latest('id')->paginate( 10 ) ),
             ] );
         }
 
