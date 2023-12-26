@@ -1,66 +1,77 @@
 <?php
 
-namespace App\Http\Controllers;
+    namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreCommentRequest;
-use App\Http\Requests\UpdateCommentRequest;
-use App\Models\Comment;
+    use App\Http\Requests\StoreCommentRequest;
+    use App\Http\Requests\UpdateCommentRequest;
+    use App\Models\Comment;
+    use App\Models\Post;
 
-class CommentController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    class CommentController extends Controller
     {
-        //
-    }
+        /**
+         * Display a listing of the resource.
+         */
+        public function index()
+        {
+            //
+        }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+        /**
+         * Show the form for creating a new resource.
+         */
+        public function create()
+        {
+            //
+        }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreCommentRequest $request)
-    {
-        //
-    }
+        /**
+         * Store a newly created resource in storage.
+         */
+        public function store( StoreCommentRequest $request, Post $post )
+        {
+            //
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Comment $comment)
-    {
-        //
-    }
+            $data = $request->validate( [
+                "body" => [ "required", "string", "max:2500" ]
+            ] );
+            Comment::make( $data )
+                ->user()->associate( $request->user() )
+                ->post()->associate( $post )
+                ->save();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Comment $comment)
-    {
-        //
-    }
+            return to_route( "posts.show", $post );
+        }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateCommentRequest $request, Comment $comment)
-    {
-        //
-    }
+        /**
+         * Display the specified resource.
+         */
+        public function show( Comment $comment )
+        {
+            //
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Comment $comment)
-    {
-        //
+        /**
+         * Show the form for editing the specified resource.
+         */
+        public function edit( Comment $comment )
+        {
+            //
+        }
+
+        /**
+         * Update the specified resource in storage.
+         */
+        public function update( UpdateCommentRequest $request, Comment $comment )
+        {
+            //
+        }
+
+        /**
+         * Remove the specified resource from storage.
+         */
+        public function destroy( Comment $comment )
+        {
+            //
+        }
     }
-}
