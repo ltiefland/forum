@@ -44,6 +44,7 @@
             return Inertia::render( 'Dashboard' );
         } )->name( 'dashboard' );
         Route::post( 'posts/{post}/comments', [ CommentController::class, "store" ] )->name("posts.comments.store");
+        Route::delete( 'comments/{comment}', [ CommentController::class, "destroy" ] )->name("comments.destroy");
     } );
 
     Route::get( "posts", [ PostController::class, "index" ] )->name( 'posts.index' );

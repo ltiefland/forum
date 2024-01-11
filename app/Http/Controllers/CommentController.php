@@ -6,6 +6,7 @@
     use App\Http\Requests\UpdateCommentRequest;
     use App\Models\Comment;
     use App\Models\Post;
+    use Illuminate\Http\Request;
 
     class CommentController extends Controller
     {
@@ -70,8 +71,14 @@
         /**
          * Remove the specified resource from storage.
          */
-        public function destroy( Comment $comment )
+        public function destroy( Request $request, Comment $comment )
         {
-            //
+            if ( $request->user()->id !== $comment->user_id )
+            {
+                abort( 403 );
+            }
+            $comment->delete();
+
+            return to_route( 'posts.show', $comment->post_id );
         }
     }
