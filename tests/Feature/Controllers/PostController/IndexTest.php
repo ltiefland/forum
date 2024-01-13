@@ -10,7 +10,7 @@
             ->assertComponent( "Posts/Index" );
     } );
 
-    it( 'passes post to the view', function ()
+    it( 'passes posts to the view', function ()
     {
 
         $posts = Post::factory( 3 )->create();

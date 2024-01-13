@@ -11,12 +11,12 @@
         {
             return [
                 "id"         => $this->id,
-                "user"       => UserResource::make( $this->user ),
+                "user"       => $this->whenLoaded( "user", fn() => UserResource::make( $this->user ) ),
                 "title"      => $this->title,
                 "updated_at" => $this->updated_at,
                 "created_at" => $this->created_at,
                 "body"       => $this->body,
-                "teaser"     => $this->teaser,
+                "teaser"     => substr( $this->body, 0, 50 ) . "...",
             ];
         }
     }

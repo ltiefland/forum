@@ -12,22 +12,14 @@
     {
         use HasFactory;
 
-        protected $appends=["teaser"];
+        public function user(): BelongsTo
+        {
+            return $this->belongsTo( User::class );
+        }
 
         public function comments(): HasMany
         {
             return $this->hasMany( Comment::class );
         }
 
-        public function user(): BelongsTo
-        {
-            return $this->belongsTo( User::class );
-        }
-
-        protected function teaser(): Attribute
-        {
-            return Attribute::make(
-                get: fn( ?string $value,array $attributes ) => substr( $attributes["body"], 0, 50 ) . "...",
-            );
-        }
     }
