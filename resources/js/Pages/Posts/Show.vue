@@ -18,7 +18,7 @@
                 </form>
                 <ul class="divide-y mt-4">
                     <li v-for="comment in comments.data" :key="comment.id" class="px-2 py-4">
-                        <Comment :comment="comment" class="break-all"></Comment>
+                        <Comment @delete="deleteComment" :comment="comment" class="break-all"></Comment>
                     </li>
                 </ul>
             </div>
@@ -49,5 +49,9 @@ const commentForm = useForm({
 const addComment = () => commentForm.post(route("posts.comments.store",props.post.id),{
     preserveScroll:true,
     onSuccess:()=>commentForm.reset(),
+});
+
+const deleteComment = (commentId) => router.delete(route('comments.destroy', {comment: commentId, page: props.commetns.meta.current_page }), {
+    preserveScroll: true,
 });
 </script>

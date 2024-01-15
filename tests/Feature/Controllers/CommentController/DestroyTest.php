@@ -42,9 +42,19 @@
     {
         $this->freezeTime();
         $comment = Comment::factory()->create();
-        $this->travel(1)->hour();
+        $this->travel( 1 )->hour();
         actingAs( $comment->user )
             ->delete( route( 'comments.destroy', $comment ) )
             ->assertForbidden();
 
     } );
+
+    it( 'redirects to the post show page with the page query parameter', function ()
+    {
+        $comment = Comment::factory()->create();
+        actingAs( $comment->user )
+            ->delete( route( 'comments.destroy', [ "comment" => $comment, "page" => 2 ] ) )
+            ->assertRedirect( route( 'posts.show', [ "post" => $comment->post_id, "page" => 2 ] ) );
+
+    } );
+
