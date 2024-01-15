@@ -1,5 +1,5 @@
 <template>
-Pa    <div class="flex items-center justify-between border-t border-gray-200 px-4 py-3 sm:px-6">
+    <div class="flex items-center justify-between border-t border-gray-200 px-4 py-3 sm:px-6">
         <div class="flex flex-1 justify-between sm:hidden">
             <Link :href="previousUrl"
                   :only="only"
