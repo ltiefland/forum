@@ -6,6 +6,7 @@
     use App\Http\Requests\UpdateCommentRequest;
     use App\Models\Comment;
     use App\Models\Post;
+    use Illuminate\Http\RedirectResponse;
     use Illuminate\Http\Request;
 
     class CommentController extends Controller
@@ -71,12 +72,12 @@
         /**
          * Remove the specified resource from storage.
          */
-        public function destroy( Request $request, Comment $comment )
+        public function destroy( Request $request, Comment $comment ): RedirectResponse
         {
+            $this->authorize( 'delete', $comment );
 
-            $this->authorize( "delete", $comment );
             $comment->delete();
 
-            return to_route( 'posts.show', [ "post" => $comment->post_id, "page" => $request->query( "page" ), ] );
+            return to_route( 'posts.show', [ 'post' => $comment->post_id, 'page' => $request->query( 'page' ) ] );
         }
     }
