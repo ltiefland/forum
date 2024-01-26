@@ -11,20 +11,9 @@
 
     class CommentController extends Controller
     {
-        /**
-         * Display a listing of the resource.
-         */
-        public function index()
+        public function __construct()
         {
-            //
-        }
-
-        /**
-         * Show the form for creating a new resource.
-         */
-        public function create()
-        {
-            //
+            $this->authorizeResource(Comment::class);
         }
 
         /**
@@ -32,33 +21,15 @@
          */
         public function store( StoreCommentRequest $request, Post $post )
         {
-            //
-
             $data = $request->validate( [
-                                            "body" => [ "required", "string", "max:2500" ],
-                                        ] );
+                "body" => [ "required", "string", "max:2500" ],
+            ] );
             Comment::make( $data )
-                   ->user()->associate( $request->user() )
-                   ->post()->associate( $post )
-                   ->save();
+                ->user()->associate( $request->user() )
+                ->post()->associate( $post )
+                ->save();
 
             return to_route( "posts.show", $post );
-        }
-
-        /**
-         * Display the specified resource.
-         */
-        public function show( Comment $comment )
-        {
-            //
-        }
-
-        /**
-         * Show the form for editing the specified resource.
-         */
-        public function edit( Comment $comment )
-        {
-            //
         }
 
         /**
@@ -66,16 +37,17 @@
          */
         public function update( UpdateCommentRequest $request, Comment $comment )
         {
-            //
-        }
+            $data = $request->validate(['body' => ['required', 'string', 'max:2500']]);
+
+            $comment->update($data);
+
+            return to_route('posts.show', ['post' => $comment->post_id, 'page' => $request->query('page')]);        }
 
         /**
          * Remove the specified resource from storage.
          */
         public function destroy( Request $request, Comment $comment ): RedirectResponse
         {
-            $this->authorize( 'delete', $comment );
-
             $comment->delete();
 
             return to_route( 'posts.show', [ 'post' => $comment->post_id, 'page' => $request->query( 'page' ) ] );
