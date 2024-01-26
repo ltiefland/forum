@@ -17,6 +17,7 @@
                 "created_at" => $this->created_at,
                 "body"       => $this->body,
                 "can"        => [
+                    "update" => $request->user()?->can( 'update', $this->resource ),
                     "delete" => $request->user()?->can( 'delete', $this->resource ),
                 ],
             ];
