@@ -29,7 +29,8 @@
                 ->post()->associate( $post )
                 ->save();
 
-            return to_route( "posts.show", $post );
+            return to_route( "posts.show", $post )
+                ->banner('Comment added.');
         }
 
         /**
@@ -41,7 +42,8 @@
 
             $comment->update($data);
 
-            return to_route('posts.show', ['post' => $comment->post_id, 'page' => $request->query('page')]);        }
+            return to_route('posts.show', ['post' => $comment->post_id, 'page' => $request->query('page')])
+                ->banner('Comment updated.');        }
 
         /**
          * Remove the specified resource from storage.
@@ -50,6 +52,7 @@
         {
             $comment->delete();
 
-            return to_route( 'posts.show', [ 'post' => $comment->post_id, 'page' => $request->query( 'page' ) ] );
+            return to_route( 'posts.show', [ 'post' => $comment->post_id, 'page' => $request->query( 'page' ) ] )
+                ->banner('Comment deleted.');
         }
     }
