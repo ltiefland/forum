@@ -24,6 +24,6 @@
             //
             JsonResource::withoutWrapping();
             Model::preventLazyLoading();
-            //$this->withoutVite();
+            Model::unguard();
         }
     }
