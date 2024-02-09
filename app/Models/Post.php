@@ -7,6 +7,7 @@
     use Illuminate\Database\Eloquent\Relations\BelongsTo;
     use Illuminate\Database\Eloquent\Relations\HasMany;
     use Illuminate\Database\Eloquent\Casts\Attribute;
+    use Illuminate\Support\Str;
 
     class Post extends Model
     {
@@ -20,6 +21,11 @@
         public function comments(): HasMany
         {
             return $this->hasMany( Comment::class );
+        }
+
+        public function title(): Attribute
+        {
+            return Attribute::set( fn( $value ) => Str::title( $value ) );
         }
 
     }

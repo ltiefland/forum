@@ -10,7 +10,7 @@
     {
         $this->validData = [
             'title' => 'Hello World',
-            'body'  => 'This is my very first post!',
+            'body'  => Str::random( 100 ),
         ];
     } );
     it( 'requires authentication', function ()

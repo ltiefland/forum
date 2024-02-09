@@ -14,6 +14,12 @@
 
     class PostController extends Controller
     {
+
+        public function __construct()
+        {
+            $this->authorizeResource( Post::class );
+        }
+
         /**
          * Display a listing of the resource.
          */
@@ -29,7 +35,7 @@
          */
         public function create()
         {
-            return inertia('Posts/Create');
+            return inertia( 'Posts/Create' );
         }
 
         /**
