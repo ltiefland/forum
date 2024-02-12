@@ -8,6 +8,7 @@
     use App\Http\Resources\PostResource;
     use App\Models\Post;
     use Illuminate\Http\Request;
+    use Illuminate\Support\Str;
     use Inertia\Inertia;
     use Inertia\Response;
     use Inertia\ResponseFactory;
@@ -53,15 +54,19 @@
                 ...$data,
                 'user_id' => $request->user()->id
             ] );
-            return to_route( "posts.show", $post )
+            return redirect($post->showRoute())
                 ->banner( 'Post added.' );
         }
 
         /**
          * Display the specified resource.
          */
-        public function show( Post $post )
+        public function show( Request $request, Post $post )
         {
+            if ( !Str::contains( $post->showRoute(), $request->path() ) )
+            {
+                return redirect( $post->showRoute( $request->query() ), 301 );
+            }
             $post->load( 'user' );
             return inertia( 'Posts/Show', [
                 "post"     => fn() => PostResource::make( $post ),

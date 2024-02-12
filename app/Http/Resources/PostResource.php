@@ -17,6 +17,9 @@
                 "created_at" => $this->created_at,
                 "body"       => $this->body,
                 "teaser"     => substr( $this->body, 0, 50 ) . "...",
+                "routes"     => [
+                    "show" => $this->showRoute(),
+                ]
             ];
         }
     }

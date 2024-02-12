@@ -13,7 +13,7 @@
     {
         public function __construct()
         {
-            $this->authorizeResource(Comment::class);
+            $this->authorizeResource( Comment::class );
         }
 
         /**
@@ -29,8 +29,8 @@
                 ->post()->associate( $post )
                 ->save();
 
-            return to_route( "posts.show", $post )
-                ->banner('Comment added.');
+            return redirect( $post->showRoute() )
+                ->banner( 'Comment added.' );
         }
 
         /**
@@ -38,12 +38,13 @@
          */
         public function update( UpdateCommentRequest $request, Comment $comment )
         {
-            $data = $request->validate(['body' => ['required', 'string', 'max:2500']]);
+            $data = $request->validate( [ 'body' => [ 'required', 'string', 'max:2500' ] ] );
 
-            $comment->update($data);
+            $comment->update( $data );
 
-            return to_route('posts.show', ['post' => $comment->post_id, 'page' => $request->query('page')])
-                ->banner('Comment updated.');        }
+            return redirect( $comment->post->showRoute( [ 'page' => $request->query( 'page' ) ] ) )
+                ->banner( 'Comment updated.' );
+        }
 
         /**
          * Remove the specified resource from storage.
@@ -52,7 +53,7 @@
         {
             $comment->delete();
 
-            return to_route( 'posts.show', [ 'post' => $comment->post_id, 'page' => $request->query( 'page' ) ] )
-                ->banner('Comment deleted.');
+            return redirect( $comment->post->showRoute( [ 'page' => $request->query( 'page' ) ] ) )
+                ->banner( 'Comment deleted.' );
         }
     }
