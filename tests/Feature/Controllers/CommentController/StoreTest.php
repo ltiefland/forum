@@ -38,7 +38,7 @@
             ->post( route( "posts.comments.store", $post ), [
                 "body" => "This is a comment",
             ] )
-            ->assertRedirect( route( "posts.show", $post ) );
+            ->assertRedirect( $post->showRoute() );
 
     } );
 
