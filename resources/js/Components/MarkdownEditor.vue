@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="bg-white rounded-md border-0 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600">
         <EditorContent :editor="editor"/>
     </div>
 </template>
@@ -22,6 +22,11 @@ const editor = useEditor({
         StarterKit,
         Markdown
     ],
+    editorProps: {
+        attributes: {
+            class: 'min-h-[512px] prose prose-sm max-w-none py-1.5 px-3',
+        },
+    },
     onUpdate: () => emit('update:modelValue', editor.value?.storage.markdown.getMarkdown()),
 });
 
