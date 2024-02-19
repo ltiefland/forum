@@ -26,6 +26,7 @@
         "@tiptap/starter-kit": "^2.2.3",
         "@tiptap/vue-3": "^2.2.3",
         "date-fns": "^2.30.0",
+        "remixicon": "^4.1.0",
         "tiptap-markdown": "^0.8.9"
     }
 }
