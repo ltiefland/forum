@@ -68,6 +68,50 @@
                     <i class="ri-list-ordered"></i>
                 </button>
             </li>
+            <li>
+                <button @click="promptUserForHref"
+                        type="button"
+                        :class="[
+                            editor.isActive('link')?'bg-indigo-500 text-white' : 'hover:bg-gray-200'
+                        ]"
+                        class="px-3 py-2"
+                        title="Add link">
+                    <i class="ri-link"></i>
+                </button>
+            </li>
+            <li>
+                <button @click="()=>editor.chain().focus().toggleHeading({ level: 2 }).run()"
+                        type="button"
+                        :class="[
+                            editor.isActive('heading',{ level: 2 })?'bg-indigo-500 text-white' : 'hover:bg-gray-200'
+                        ]"
+                        class="px-3 py-2"
+                        title="Heading 1">
+                    <i class="ri-h-1"></i>
+                </button>
+            </li>
+            <li>
+                <button @click="()=>editor.chain().focus().toggleHeading({ level: 3 }).run()"
+                        type="button"
+                        :class="[
+                            editor.isActive('heading',{ level: 3 })?'bg-indigo-500 text-white' : 'hover:bg-gray-200'
+                        ]"
+                        class="px-3 py-2"
+                        title="Heading 2">
+                    <i class="ri-h-2"></i>
+                </button>
+            </li>
+            <li>
+                <button @click="()=>editor.chain().focus().toggleHeading({ level: 4 }).run()"
+                        type="button"
+                        :class="[
+                            editor.isActive('heading',{ level: 4 })?'bg-indigo-500 text-white' : 'hover:bg-gray-200'
+                        ]"
+                        class="px-3 py-2"
+                        title="Heading 3">
+                    <i class="ri-h-3"></i>
+                </button>
+            </li>
         </menu>
         <EditorContent :editor="editor"/>
     </div>
@@ -78,6 +122,7 @@ import StarterKit from '@tiptap/starter-kit'
 import {watch} from "vue";
 import {Markdown} from "tiptap-markdown";
 import 'remixicon/fonts/remixicon.css';
+import {Link} from "@tiptap/extension-link";
 
 const props = defineProps({
     modelValue: '',
@@ -89,7 +134,14 @@ const emit = defineEmits([
 
 const editor = useEditor({
     extensions: [
-        StarterKit,
+        StarterKit.configure({
+            heading: {
+                levels: [2, 3, 4],
+            },
+            code:false,
+            codeBlock:false,
+        }),
+        Link,
         Markdown
     ],
     editorProps: {
@@ -108,4 +160,19 @@ watch(() => props.modelValue, (value) => {
 }, {
     immediate: true,
 })
+
+const promptUserForHref=()=>{
+
+    if(editor.value?.isActive('link'))
+    {
+        return editor.value?.chain().unsetLink().run();
+    }
+    const href=prompt("Where do you want to link to?");
+
+    if(!href)
+    {
+        return editor.value?.chain().focus().run();
+    }
+    return editor.value?.chain().focus().setLink( { href }).run()
+};
 </script>
