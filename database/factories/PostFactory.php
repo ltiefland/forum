@@ -14,6 +14,7 @@
     class PostFactory extends Factory
     {
         private static Collection $fixtures;
+
         /**
          * Define the model's default state.
          *
