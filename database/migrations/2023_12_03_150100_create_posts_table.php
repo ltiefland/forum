@@ -17,6 +17,7 @@
                 $table->foreignId( 'user_id' )->constrained()->restrictOnDelte();
                 $table->text( 'title' );
                 $table->longtext( 'body' );
+                $table->longtext( 'html' );
                 $table->timestamps();
             } );
         }

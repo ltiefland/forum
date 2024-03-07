@@ -52,3 +52,10 @@
         get( route( 'posts.show', [ $post, "foo-bar", "page" => 2, ] ) )
             ->assertRedirect( $post->showRoute( [ "page" => 2, ] ) );
     } );
+
+    it( 'generates the html', function ()
+    {
+        $post = Post::factory()->make( [ "body" => "## Hello world" ] );
+        $post->save();
+        expect( $post->html )->toEqual( Str( $post->body )->markdown() );
+    } );
