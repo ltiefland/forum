@@ -17,6 +17,7 @@
                 $table->foreignId( 'user_id' )->constrained()->restrictOnDelete();
                 $table->foreignId( 'post_id' )->constrained()->cascadeOnDelete();
                 $table->longtext( 'body' );
+                $table->longtext( 'html' );
                 $table->timestamps();
             } );
         }
