@@ -1,26 +1,31 @@
 <?php
 
-    namespace App\Http\Resources;
+namespace App\Http\Resources;
 
-    use Illuminate\Http\Request;
-    use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 
-    class PostResource extends JsonResource
+class PostResource extends JsonResource
+{
+    /**
+     * Transform the resource into an array.
+     *
+     * @return array<string, mixed>
+     */
+    public function toArray(Request $request): array
     {
-        public function toArray( Request $request ): array
-        {
-            return [
-                "id"         => $this->id,
-                "user"       => $this->whenLoaded( "user", fn() => UserResource::make( $this->user ) ),
-                "title"      => $this->title,
-                "updated_at" => $this->updated_at,
-                "created_at" => $this->created_at,
-                "body"       => $this->body,
-                "html"       => $this->html,
-                "teaser"     => substr( $this->body, 0, 50 ) . "...",
-                "routes"     => [
-                    "show" => $this->showRoute(),
-                ],
-            ];
-        }
+        return [
+            'id' => $this->id,
+            'user' => $this->whenLoaded('user', fn () => UserResource::make($this->user)),
+            'topic' => $this->whenLoaded('topic', fn () => TopicResource::make($this->topic)),
+            'title' => $this->title,
+            'body' => $this->body,
+            'html' => $this->html,
+            'updated_at' => $this->updated_at,
+            'created_at' => $this->created_at,
+            'routes' => [
+                'show' => $this->showRoute(),
+            ],
+        ];
     }
+}

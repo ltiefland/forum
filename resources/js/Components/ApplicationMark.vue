@@ -1,3 +1,3 @@
 <template>
-    <img src="/assets/symbol-analog.png" alt="" />
+    <img src="/assets/symbol-analog.png" />
 </template>

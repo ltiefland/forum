@@ -70,7 +70,7 @@ return [
     |
     */
 
-    'timezone' => 'Europe/Berlin',
+    'timezone' => 'UTC',
 
     /*
     |--------------------------------------------------------------------------
@@ -83,7 +83,7 @@ return [
     |
     */
 
-    'locale' => 'de',
+    'locale' => 'en',
 
     /*
     |--------------------------------------------------------------------------
@@ -109,7 +109,7 @@ return [
     |
     */
 
-    'faker_locale' => 'de_DE',
+    'faker_locale' => 'en_US',
 
     /*
     |--------------------------------------------------------------------------
@@ -141,7 +141,7 @@ return [
 
     'maintenance' => [
         'driver' => 'file',
-        // 'store' => 'redis',
+        // 'store'  => 'redis',
     ],
 
     /*
@@ -155,7 +155,7 @@ return [
     |
     */
 
-    'providers' => ServiceProvider::defaultProviders()->merge( [
+    'providers' => ServiceProvider::defaultProviders()->merge([
         /*
          * Package Service Providers...
          */
