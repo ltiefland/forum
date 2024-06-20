@@ -30,6 +30,7 @@
                          ->paginate();
             return inertia( 'Posts/Index', [
                 'posts' => PostResource::collection( $posts ),
+                'topics'=>fn ()=> TopicResource::collection( Topic::all() ),
                 'selectedTopic' => fn()=>$topic?TopicResource::make($topic):null,
             ] );
         }
