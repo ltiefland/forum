@@ -29,9 +29,9 @@
                          ->latest( 'id' )
                          ->paginate();
             return inertia( 'Posts/Index', [
-                'posts' => PostResource::collection( $posts ),
-                'topics'=>fn ()=> TopicResource::collection( Topic::all() ),
-                'selectedTopic' => fn()=>$topic?TopicResource::make($topic):null,
+                'posts'         => PostResource::collection( $posts ),
+                'topics'        => fn() => TopicResource::collection( Topic::all() ),
+                'selectedTopic' => fn() => $topic ? TopicResource::make( $topic ) : null,
             ] );
         }
 
@@ -49,8 +49,9 @@
         public function store( Request $request )
         {
             $data = $request->validate( [
-                                            'title' => [ 'required', 'string', 'min:10', 'max:120' ],
-                                            'body'  => [ 'required', 'string', 'min:100', 'max:10000' ],
+                                            'title'    => [ 'required', 'string', 'min:10', 'max:120' ],
+                                            'topic_id' => [ 'required' ],
+                                            'body'     => [ 'required', 'string', 'min:100', 'max:10000' ],
                                         ] );
 
             $post = Post::create( [
