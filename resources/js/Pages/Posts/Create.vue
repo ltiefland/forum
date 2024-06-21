@@ -17,7 +17,7 @@
 
                 <div class="mt-3">
                     <InputLabel for="topic_id">Select a topic</InputLabel>
-                    <select v-model="form.topic_id" id="topic_id">
+                    <select v-model="form.topic_id" id="topic_id" class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                         <option v-for="topic in topics" :key="topic.id" :value="topic.id">{{ topic.name }}</option>
                     </select>
                 </div>
