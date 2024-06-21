@@ -16,6 +16,12 @@
                 </div>
 
                 <div class="mt-3">
+                    <InputLabel for="topic_id">Select a topic</InputLabel>
+                    <select v-model="form.topic_id" id="topic_id">
+                        <option v-for="topic in topics" :key="topic.id" :value="topic.id">{{ topic.name }}</option>
+                    </select>
+                </div>
+                <div class="mt-3">
                     <InputLabel for="body" class="sr-only">Body</InputLabel>
                     <MarkdownEditor v-model="form.body">
                         <template #toolbar="{ editor }">
