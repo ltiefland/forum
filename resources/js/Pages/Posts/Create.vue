@@ -12,7 +12,7 @@
                         v-model="form.title"
                         placeholder="Give it a great title…"
                     />
-                    <InputError :message="form.errors.title" class="mt-1" />
+                    <InputError :message="form.errors.title" class="mt-1"/>
                 </div>
 
                 <div class="mt-3">
@@ -31,7 +31,7 @@
                             </li>
                         </template>
                     </MarkdownEditor>
-                    <InputError :message="form.errors.body" class="mt-1" />
+                    <InputError :message="form.errors.body" class="mt-1"/>
                 </div>
 
                 <div class="mt-3">
@@ -43,7 +43,7 @@
 </template>
 
 <script setup>
-import { useForm } from "@inertiajs/vue3";
+import {useForm} from "@inertiajs/vue3";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
@@ -52,11 +52,14 @@ import TextArea from "@/Components/TextArea.vue";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import Container from "@/Components/Container.vue";
 import MarkdownEditor from "@/Components/MarkdownEditor.vue";
-import { isInProduction } from "@/Utilities/environment.js";
+import {isInProduction} from "@/Utilities/environment.js";
 import PageHeading from "@/Pages/Posts/PageHeading.vue";
+
+const props = defineProps(['topics']);
 
 const form = useForm({
     title: "",
+    topic_id:props.topics[0].id,
     body: "",
 });
 
