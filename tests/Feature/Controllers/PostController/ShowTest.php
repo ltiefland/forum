@@ -19,7 +19,7 @@
     {
         $post = Post::factory()->create();
 
-        $post->load( 'user' );
+        $post->load( 'user', 'topic' );
 
         get( $post->showRoute() )
             ->assertHasResource( 'post', PostResource::make( $post ) );

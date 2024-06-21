@@ -74,7 +74,7 @@
                 return redirect( $post->showRoute( $request->query() ), status: 301 );
             }
 
-            $post->load( 'user' );
+            $post->load( 'user', 'topic' );
 
             return inertia( 'Posts/Show', [
                 'post'     => fn() => PostResource::make( $post ),
