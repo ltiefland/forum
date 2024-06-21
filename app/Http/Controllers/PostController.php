@@ -40,7 +40,9 @@
          */
         public function create()
         {
-            return inertia( 'Posts/Create' );
+            return inertia( 'Posts/Create',[
+                'topics' => TopicResource::collection( Topic::all() ),
+            ] );
         }
 
         /**
