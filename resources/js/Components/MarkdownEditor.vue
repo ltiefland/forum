@@ -198,27 +198,27 @@
                     <i class="ri-h-3"></i>
                 </button>
             </li>
-            <slot name="toolbar" :editor="editor" />
+            <slot name="toolbar" :editor="editor"/>
         </menu>
-        <EditorContent :editor="editor" />
+        <EditorContent :editor="editor"/>
     </div>
 </template>
 
 <script setup>
-import { EditorContent, useEditor } from "@tiptap/vue-3";
-import { StarterKit } from "@tiptap/starter-kit";
-import { Link } from "@tiptap/extension-link";
-import { watch } from "vue";
-import { Markdown } from "tiptap-markdown";
+import {EditorContent, useEditor} from "@tiptap/vue-3";
+import {StarterKit} from "@tiptap/starter-kit";
+import {Link} from "@tiptap/extension-link";
+import {onMounted, watch} from "vue";
+import {Markdown} from "tiptap-markdown";
 import "remixicon/fonts/remixicon.css";
-import { Placeholder } from "@tiptap/extension-placeholder";
+import {Placeholder} from "@tiptap/extension-placeholder";
 
 const props = defineProps({
     editorClass: "",
     placeholder: null,
 });
 
-const model=defineModel();
+const model = defineModel();
 
 const editor = useEditor({
     extensions: [
@@ -241,23 +241,25 @@ const editor = useEditor({
         },
     },
     onUpdate: () =>
-        model.value= editor.value?.storage.markdown.getMarkdown(),
+        model.value = editor.value?.storage.markdown.getMarkdown(),
 });
 
-defineExpose({ focus: () => editor.value.commands.focus() });
+defineExpose({focus: () => editor.value.commands.focus()});
 
-watch(
-    model,
-    (value) => {
-        if (value === editor.value?.storage.markdown.getMarkdown()) {
-            return;
-        }
+onMounted(() => {
+        watch(
+            model,
+            (value) => {
+                if (value === editor.value?.storage.markdown.getMarkdown()) {
+                    return;
+                }
 
-        editor.value?.commands.setContent(value);
-    },
-    { immediate: true },
-);
-
+                editor.value?.commands.setContent(value);
+            },
+            {immediate: true},
+        );
+    }
+)
 const promptUserForHref = () => {
     if (editor.value?.isActive("link")) {
         return editor.value?.chain().unsetLink().run();
@@ -269,7 +271,7 @@ const promptUserForHref = () => {
         return editor.value?.chain().focus().run();
     }
 
-    return editor.value?.chain().focus().setLink({ href }).run();
+    return editor.value?.chain().focus().setLink({href}).run();
 };
 </script>
 
