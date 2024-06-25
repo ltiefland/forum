@@ -214,12 +214,11 @@ import "remixicon/fonts/remixicon.css";
 import { Placeholder } from "@tiptap/extension-placeholder";
 
 const props = defineProps({
-    modelValue: "",
     editorClass: "",
     placeholder: null,
 });
 
-const emit = defineEmits(["update:modelValue"]);
+const model=defineModel();
 
 const editor = useEditor({
     extensions: [
@@ -242,13 +241,13 @@ const editor = useEditor({
         },
     },
     onUpdate: () =>
-        emit("update:modelValue", editor.value?.storage.markdown.getMarkdown()),
+        model.value= editor.value?.storage.markdown.getMarkdown(),
 });
 
 defineExpose({ focus: () => editor.value.commands.focus() });
 
 watch(
-    () => props.modelValue,
+    model,
     (value) => {
         if (value === editor.value?.storage.markdown.getMarkdown()) {
             return;
