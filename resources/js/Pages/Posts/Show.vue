@@ -34,7 +34,7 @@
                             id="body"
                             v-model="commentForm.body"
                             placeholder="Speak your mind Spock…"
-                            editorClass="min-h-[160px]"
+                            editorClass="!min-h-[160px]"
                         />
                         <InputError
                             :message="commentForm.errors.body"
