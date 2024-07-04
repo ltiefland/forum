@@ -18,6 +18,7 @@
                 $table->foreignId( 'post_id' )->constrained()->cascadeOnDelete();
                 $table->longtext( 'body' );
                 $table->longtext( 'html' );
+                $table->unsignedBigInteger( 'likes_count' )->default( 0 );
                 $table->timestamps();
             } );
         }

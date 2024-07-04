@@ -11,11 +11,11 @@
                 class="prose prose-sm mt-1 max-w-none"
                 v-html="comment.html"
             ></div>
-            <span
+            <span>
                 class="block pt-1 text-xs text-gray-600 first-letter:uppercase"
                 >By {{ comment.user.name }}
-                {{ relativeDate(comment.created_at) }}</span
-            >
+                {{ relativeDate(comment.created_at) }} | <span class="text-pink-500">{{ comment.likes_count }} likes</span>
+            </span>
             <div class="mt-2 flex justify-end space-x-3 empty:hidden">
                 <form
                     v-if="comment.can?.update"

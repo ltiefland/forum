@@ -9,7 +9,9 @@
             <span class="mt-1 block text-sm text-gray-600"
                 >{{ formattedDate }} by {{ post.user.name }}</span
             >
-
+            <div class="mt-4">
+                <span>{{ post.likes_count }} likes</span>
+            </div>
             <article
                 class="prose prose-sm mt-6 max-w-none"
                 v-html="post.html"
