@@ -2,9 +2,9 @@
 
     namespace App\Http\Resources;
 
-    use Faker\Core\Number;
     use Illuminate\Http\Request;
     use Illuminate\Http\Resources\Json\JsonResource;
+    use Illuminate\Support\Number;
 
     class CommentResource extends JsonResource
     {

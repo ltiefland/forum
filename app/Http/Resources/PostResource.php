@@ -2,7 +2,7 @@
 
     namespace App\Http\Resources;
 
-    use Faker\Core\Number;
+    use Illuminate\Support\Number;
     use Illuminate\Http\Request;
     use Illuminate\Http\Resources\Json\JsonResource;
 
