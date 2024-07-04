@@ -21,7 +21,7 @@
                 'post'        => PostResource::make( $this->whenLoaded( 'post' ) ),
                 'body'        => $this->body,
                 'html'        => $this->html,
-                'likes_count' => Number::abbreviate( $this->likes_count ),
+                'likes_count' => Number::format( $this->likes_count, null, null, 'de_DE' ),
                 'updated_at'  => $this->updated_at,
                 'created_at'  => $this->created_at,
                 'can'         => [
