@@ -5,6 +5,7 @@
     use App\Models\Post;
     use App\Models\User;
     use Illuminate\Database\Eloquent\Factories\Factory;
+    use Illuminate\Support\Str;
 
     /**
      * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Like>
@@ -19,9 +20,9 @@
         public function definition(): array
         {
             return [
-                'user_id'       => User::factory(),
+                'user_id'     => User::factory( [ 'email' => 'test+' . Str::uuid() . '@example.com' ] ),
                 'likeable_type' => $this->likeableType( ... ),
-                'likeable_id'   => Post::factory(),
+                'likeable_id' => Post::factory(),
             ];
         }
 

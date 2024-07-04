@@ -16,8 +16,6 @@
         use ConvertsMarkdownToHtml;
         use HasFactory;
 
-        protected $withCount = [ 'likes' ];
-
         public function user(): BelongsTo
         {
             return $this->belongsTo( User::class );

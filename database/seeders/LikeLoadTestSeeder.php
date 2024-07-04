@@ -25,9 +25,9 @@
             {
                 Like::factory( 100 )->for( $post, 'likeable' )->create();
                 $progress->advance( 100 );
+                $post->increment( 'likes_count', 100 );
             } );
             $progress->finish();
 
-            $post->increment( 'likes_count', 500_000 );
         }
     }
