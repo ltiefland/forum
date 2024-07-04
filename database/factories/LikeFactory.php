@@ -20,8 +20,8 @@
         {
             return [
                 'user_id'       => User::factory(),
-                'likeable_id'   => $this->likeableType( ... ),
-                'likeable_type' => Post::class,
+                'likeable_type' => $this->likeableType( ... ),
+                'likeable_id'   => Post::factory(),
             ];
         }
 
