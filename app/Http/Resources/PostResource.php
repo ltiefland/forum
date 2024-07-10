@@ -2,6 +2,7 @@
 
     namespace App\Http\Resources;
 
+    use App\Models\Like;
     use Illuminate\Support\Number;
     use Illuminate\Http\Request;
     use Illuminate\Http\Resources\Json\JsonResource;
@@ -27,6 +28,9 @@
                 'created_at'  => $this->created_at,
                 'routes'      => [
                     'show' => $this->showRoute(),
+                ],
+                'can'         => [
+                    'like' => $request->user()?->can( 'create', [ Like::class ], $this->resource ),
                 ],
             ];
         }
