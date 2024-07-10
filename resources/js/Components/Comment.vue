@@ -17,6 +17,16 @@
                 {{ relativeDate(comment.created_at) }} | <span class="text-pink-500">{{ comment.likes_count }} likes</span>
             </span>
             <div class="mt-2 flex justify-end space-x-3 empty:hidden">
+                <div class="mt-2">
+                    <Link v-if="comment.can.like" :href="route('likes.store',['comment',comment.id])" method="post" class="inline-block bg-indigo-600 hover:bg-pink-500 transition-colors">
+                        <HandThumbUpIcon class="size-4 inline-block mr-1"/>
+                        <span class="sr-only">Like comment</span>
+                    </Link>
+                    <Link v-else :href="route('likes.destroy',['comment',comment.id])" method="delete" class="inline-block text-gray-700 hover:text-pink-500 transition-colors">
+                        <HandThumbDownIcon class="size-4 inline-block mr-1"/>
+                        <span class="sr-only">Unlike comment</span>
+                    </Link>
+                </div>
                 <form
                     v-if="comment.can?.update"
                     @submit.prevent="$emit('edit', comment.id)"
@@ -42,8 +52,9 @@
 
 <script setup>
 import { relativeDate } from "@/Utilities/date.js";
-import { router, usePage } from "@inertiajs/vue3";
+import { router, usePage, Link } from "@inertiajs/vue3";
 import { computed } from "vue";
+import {HandThumbDownIcon, HandThumbUpIcon} from "@heroicons/vue/20/solid/esm/index.js";
 
 const props = defineProps(["comment"]);
 
