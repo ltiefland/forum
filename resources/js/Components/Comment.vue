@@ -4,7 +4,7 @@
             <img
                 :src="comment.user.profile_photo_url"
                 class="h-10 w-10 rounded-full"
-            />
+             alt="comment.user.name"/>
         </div>
         <div class="flex-1">
             <div
@@ -52,8 +52,7 @@
 
 <script setup>
 import { relativeDate } from "@/Utilities/date.js";
-import { router, usePage, Link } from "@inertiajs/vue3";
-import { computed } from "vue";
+import { Link } from "@inertiajs/vue3";
 import {HandThumbDownIcon, HandThumbUpIcon} from "@heroicons/vue/20/solid/esm/index.js";
 
 const props = defineProps(["comment"]);
