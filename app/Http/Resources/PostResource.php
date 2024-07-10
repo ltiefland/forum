@@ -9,6 +9,11 @@
 
     class PostResource extends JsonResource
     {
+        public function withLikePermission(): self
+        {
+            return $this;
+        }
+
         /**
          * Transform the resource into an array.
          *

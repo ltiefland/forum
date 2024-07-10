@@ -40,7 +40,7 @@
          */
         public function create()
         {
-            return inertia( 'Posts/Create',[
+            return inertia( 'Posts/Create', [
                 'topics' => TopicResource::collection( Topic::all() ),
             ] );
         }
@@ -77,7 +77,7 @@
             $post->load( 'user', 'topic' );
 
             return inertia( 'Posts/Show', [
-                'post'     => fn() => PostResource::make( $post ),
+                'post'     => fn() => PostResource::make( $post )->withLikePermission(),
                 'comments' => fn() => CommentResource::collection( $post->comments()->with( 'user' )->latest()->latest( 'id' )->paginate( 10 ) ),
             ] );
         }
