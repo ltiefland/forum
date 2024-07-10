@@ -12,7 +12,10 @@
             <div class="mt-4">
                 <span>{{ post.likes_count }} likes</span>
                 <div>
-                    <Link :href="route('likes.store',['post',post.id])" method="post">Like post</Link>
+                    <Link :href="route('likes.store',['post',post.id])" method="post" class="inline-block bg-indigo-600 hover:bg-pink-500 transition-colors text-white py-1.5 px-3 rounded-b-full">
+                        <HandThumbUpIcon class="size-4 inline-block"/>
+                        Like post
+                    </Link>
                 </div>
             </div>
             <article
@@ -107,6 +110,7 @@ import { useConfirm } from "@/Utilities/Composables/useConfirm.js";
 import MarkdownEditor from "@/Components/MarkdownEditor.vue";
 import PageHeading from "@/Pages/Posts/PageHeading.vue";
 import Pill from "@/Pages/Posts/Pill.vue";
+import {HandThumbUpIcon, HandThumbDownIcon} from "@heroicons/vue/20/solid/esm/index.js";
 
 const props = defineProps(["post", "comments"]);
 
