@@ -18,7 +18,7 @@
             </span>
             <div class="mt-2 flex justify-end space-x-3 empty:hidden">
                 <div class="mt-2">
-                    <Link v-if="comment.can.like" :href="route('likes.store',['comment',comment.id])" method="post" class="inline-block bg-indigo-600 hover:bg-pink-500 transition-colors">
+                    <Link v-if="comment.can.like" :href="route('likes.store',['comment',comment.id])" method="post" class="inline-block text-gray-700 hover:text-pink-500 transition-colors">
                         <HandThumbUpIcon class="size-4 inline-block mr-1"/>
                         <span class="sr-only">Like comment</span>
                     </Link>
