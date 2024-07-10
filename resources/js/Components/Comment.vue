@@ -18,11 +18,11 @@
             </span>
             <div class="mt-2 flex justify-end space-x-3 empty:hidden">
                 <div class="mt-2">
-                    <Link v-if="comment.can.like" :href="route('likes.store',['comment',comment.id])" method="post" class="inline-block text-gray-700 hover:text-pink-500 transition-colors">
+                    <Link v-if="comment.can.like"  preserve-scroll :href="route('likes.store',['comment',comment.id])" method="post" class="inline-block text-gray-700 hover:text-pink-500 transition-colors">
                         <HandThumbUpIcon class="size-4 inline-block mr-1"/>
                         <span class="sr-only">Like comment</span>
                     </Link>
-                    <Link v-else :href="route('likes.destroy',['comment',comment.id])" method="delete" class="inline-block text-gray-700 hover:text-pink-500 transition-colors">
+                    <Link v-else preserve-scroll :href="route('likes.destroy',['comment',comment.id])" method="delete" class="inline-block text-gray-700 hover:text-pink-500 transition-colors">
                         <HandThumbDownIcon class="size-4 inline-block mr-1"/>
                         <span class="sr-only">Unlike comment</span>
                     </Link>
