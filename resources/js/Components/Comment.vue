@@ -17,7 +17,7 @@
                 {{ relativeDate(comment.created_at) }} | <span class="text-pink-500">{{ comment.likes_count }} likes</span>
             </span>
             <div class="mt-2 flex justify-end space-x-3 empty:hidden">
-                <div v-if="$page.props.auth.user" class="mt-2">
+                <div v-if="$page.props.auth.user">
                     <Link v-if="comment.can.like"  preserve-scroll :href="route('likes.store',['comment',comment.id])" method="post" class="inline-block text-gray-700 hover:text-pink-500 transition-colors">
                         <HandThumbUpIcon class="size-4 inline-block mr-1"/>
                         <span class="sr-only">Like comment</span>
