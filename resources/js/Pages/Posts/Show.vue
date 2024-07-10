@@ -11,6 +11,9 @@
             >
             <div class="mt-4">
                 <span>{{ post.likes_count }} likes</span>
+                <div>
+                    <Link :href="route('likes.store',['post',$post.id])" method="post">Like post</Link>
+                </div>
             </div>
             <article
                 class="prose prose-sm mt-6 max-w-none"
