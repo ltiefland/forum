@@ -16,6 +16,10 @@
                         <HandThumbUpIcon class="size-4 inline-block mr-1"/>
                         Like post
                     </Link>
+                    <Link :href="route('likes.destroy',['post',post.id])" method="delete" class="inline-block bg-indigo-600 hover:bg-pink-500 transition-colors text-white py-1.5 px-3 rounded-full">
+                        <HandThumbDownIcon class="size-4 inline-block mr-1"/>
+                        Unlike post
+                    </Link>
                 </div>
             </div>
             <article
