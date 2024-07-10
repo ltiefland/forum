@@ -30,7 +30,7 @@
                     'show' => $this->showRoute(),
                 ],
                 'can'         => [
-                    'like' => $request->user()?->can( 'create', [ Like::class ], $this->resource ),
+                    'like' => $request->user()?->can( 'create', [ Like::class, $this->resource ] ),
                 ],
             ];
         }
