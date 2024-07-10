@@ -9,8 +9,14 @@
 
     class PostResource extends JsonResource
     {
+        /**
+         * @var true
+         */
+        private bool $withLikePermission = false;
+
         public function withLikePermission(): self
         {
+            $this->withLikePermission = true;
             return $this;
         }
 
@@ -35,7 +41,7 @@
                     'show' => $this->showRoute(),
                 ],
                 'can'         => [
-                    'like' => $request->user()?->can( 'create', [ Like::class, $this->resource ] ),
+                    'like' => $this->when( $this->withLikePermission, fn() => $request->user()?->can( 'create', [ Like::class, $this->resource ] ) ),
                 ],
             ];
         }
