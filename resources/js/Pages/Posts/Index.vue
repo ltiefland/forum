@@ -15,11 +15,11 @@
                         >{{ topic.name }}</Pill>
                     </li>
                 </menu>
-                <form class="mt-4">
+                <form @submit.prevent="search" class="mt-4">
                     <div>
                         <InputLabel for="query">Search</InputLabel>
                         <div class="flex space-x-2 mt-1">
-                            <TextInput class="w-full" id="query"/>
+                            <TextInput v-model="searchForm.query" class="w-full" id="query"/>
                             <SecondaryButton type="submit">Search</SecondaryButton>
                         </div>
                     </div>
@@ -57,7 +57,7 @@
 import AppLayout from "@/Layouts/AppLayout.vue";
 import Container from "@/Components/Container.vue";
 import Pagination from "@/Components/Pagination.vue";
-import {Link} from "@inertiajs/vue3";
+import {Link, useForm} from "@inertiajs/vue3";
 import {relativeDate} from "@/Utilities/date.js";
 import PageHeading from "@/Pages/Posts/PageHeading.vue";
 import Pill from "@/Pages/Posts/Pill.vue";
@@ -68,4 +68,12 @@ import SecondaryButton from "@/Components/SecondaryButton.vue";
 defineProps(["posts", "topics", "selectedTopic"]);
 
 const formattedDate = (post) => relativeDate(post.created_at);
+
+const searchForm = useForm({
+    query:''
+})
+
+const search=()=>{
+    searchForm.get(route('posts.index'))
+}
 </script>
