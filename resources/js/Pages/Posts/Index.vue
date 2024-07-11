@@ -12,7 +12,8 @@
                     <li v-for="topic in topics" :key="topic.id">
                         <Pill :href="route('posts.index',{ topic: topic.slug })"
                               :filled="topic.id===selectedTopic?.id"
-                        >{{ topic.name }}</Pill>
+                        >{{ topic.name }}
+                        </Pill>
                     </li>
                 </menu>
                 <form @submit.prevent="search" class="mt-4">
@@ -37,11 +38,11 @@
                     >
                         <span
                             class="text-lg font-bold group-hover:text-indigo-500"
-                            >{{ post.title }}</span
+                        >{{ post.title }}</span
                         >
                         <span
                             class="block pt-1 text-sm text-gray-600 first-letter:uppercase"
-                            >{{ formattedDate(post) }} by
+                        >{{ formattedDate(post) }} by
                             {{ post.user.name }}</span
                         >
                     </Link>
@@ -49,7 +50,7 @@
                 </li>
             </ul>
 
-            <Pagination :meta="posts.meta" :only="['posts']" class="mt-2" />
+            <Pagination :meta="posts.meta" :only="['posts']" class="mt-2"/>
         </Container>
     </AppLayout>
 </template>
@@ -65,15 +66,15 @@ import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 
-defineProps(["posts", "topics", "selectedTopic"]);
+const props = defineProps(["posts", "topics", "selectedTopic", "query"]);
 
 const formattedDate = (post) => relativeDate(post.created_at);
 
 const searchForm = useForm({
-    query:''
+    query: props.query
 })
 
-const search=()=>{
+const search = () => {
     searchForm.get(route('posts.index'))
 }
 </script>
