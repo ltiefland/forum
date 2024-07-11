@@ -7,7 +7,9 @@
 
                 <menu class="flex space-x-1 mt-3 overflow-x-auto pb-2 pt-1">
                     <li>
-                        <Pill :href="route('posts.index',{ query:searchForm.query })" :filled="! selectedTopic">All Posts</Pill>
+                        <Pill :href="route('posts.index',{ query:searchForm.query })" :filled="! selectedTopic">All
+                            Posts
+                        </Pill>
                     </li>
                     <li v-for="topic in topics" :key="topic.id">
                         <Pill :href="route('posts.index',{ topic: topic.slug, query:searchForm.query })"
@@ -73,14 +75,15 @@ const props = defineProps(["posts", "topics", "selectedTopic", "query"]);
 const formattedDate = (post) => relativeDate(post.created_at);
 
 const searchForm = useForm({
-    query: props.query
+    query: props.query,
+    page: 1,
 })
 
 const page = usePage()
 const search = () => searchForm.get(page.url)
 
-const clearSearch=() =>{
-    searchForm.query='';
+const clearSearch = () => {
+    searchForm.query = '';
     search();
 }
 
