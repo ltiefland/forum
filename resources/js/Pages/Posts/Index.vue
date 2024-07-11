@@ -75,7 +75,6 @@ const searchForm = useForm({
 })
 
 const page = usePage()
-const search = () => {
-    searchForm.get(page.url)
-}
+const search = () => searchForm.get(page.url)
+
 </script>
