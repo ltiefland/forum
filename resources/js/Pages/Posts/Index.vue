@@ -7,10 +7,10 @@
 
                 <menu class="flex space-x-1 mt-3 overflow-x-auto pb-2 pt-1">
                     <li>
-                        <Pill :href="route('posts.index')" :filled="! selectedTopic">All Posts</Pill>
+                        <Pill :href="route('posts.index',{ query:searchForm.query })" :filled="! selectedTopic">All Posts</Pill>
                     </li>
                     <li v-for="topic in topics" :key="topic.id">
-                        <Pill :href="route('posts.index',{ topic: topic.slug })"
+                        <Pill :href="route('posts.index',{ topic: topic.slug, query:searchForm.query })"
                               :filled="topic.id===selectedTopic?.id"
                         >{{ topic.name }}
                         </Pill>
