@@ -22,6 +22,7 @@
                         <div class="flex space-x-2 mt-1">
                             <TextInput v-model="searchForm.query" class="w-full" id="query"/>
                             <SecondaryButton type="submit">Search</SecondaryButton>
+                            <DangerButton v-if="searchForm.query" @click="clearSearch">Clear</DangerButton>
                         </div>
                     </div>
                 </form>
@@ -65,6 +66,7 @@ import Pill from "@/Pages/Posts/Pill.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
+import DangerButton from "@/Components/DangerButton.vue";
 
 const props = defineProps(["posts", "topics", "selectedTopic", "query"]);
 
@@ -76,5 +78,10 @@ const searchForm = useForm({
 
 const page = usePage()
 const search = () => searchForm.get(page.url)
+
+const clearSearch=() =>{
+    searchForm.query='';
+    search();
+}
 
 </script>
