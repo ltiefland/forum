@@ -58,7 +58,7 @@
 import AppLayout from "@/Layouts/AppLayout.vue";
 import Container from "@/Components/Container.vue";
 import Pagination from "@/Components/Pagination.vue";
-import {Link, useForm} from "@inertiajs/vue3";
+import {Link, useForm, usePage} from "@inertiajs/vue3";
 import {relativeDate} from "@/Utilities/date.js";
 import PageHeading from "@/Pages/Posts/PageHeading.vue";
 import Pill from "@/Pages/Posts/Pill.vue";
@@ -74,7 +74,8 @@ const searchForm = useForm({
     query: props.query
 })
 
+const page = usePage()
 const search = () => {
-    searchForm.get(route('posts.index'))
+    searchForm.get(page.url)
 }
 </script>
