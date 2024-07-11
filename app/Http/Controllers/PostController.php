@@ -21,10 +21,14 @@
         /**
          * Display a listing of the resource.
          */
-        public function index( Topic $topic = null )
+        public function index( Request $request, Topic $topic = null )
         {
             $posts = Post::with( [ 'user', 'topic' ] )
                          ->when( $topic !== null, fn( Builder $query ) => $query->whereBelongsTo( $topic ) )
+                         ->when(
+                             $request->query( 'query' ),
+                             fn( Builder $query ) => $query->whereAny( [ 'title', 'body' ], 'LIKE', '%' . $request->query( 'query' ) . '%' )
+                         )
                          ->latest()
                          ->latest( 'id' )
                          ->paginate();
