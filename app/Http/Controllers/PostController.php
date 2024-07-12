@@ -23,16 +23,19 @@
          */
         public function index( Request $request, Topic $topic = null )
         {
-            $posts = Post::with( [ 'user', 'topic' ] )
-                         ->when( $topic !== null, fn( Builder $query ) => $query->whereBelongsTo( $topic ) )
-                         ->when(
-                             $request->query( 'query' ),
-                             fn( Builder $query ) => $query->whereAny( [ 'title', 'body' ], 'LIKE', '%' . $request->query( 'query' ) . '%' )
-                         )
-                         ->latest()
-                         ->latest( 'id' )
-                         ->paginate()
-                         ->withQueryString();
+            if ( $request->query( 'query' ) )
+            {
+                $posts = Post::search( $request->query( 'query' ) )
+                             ->query( fn( Builder $query ) => $query->with( [ 'user', 'topic' ] ) )
+                             ->when( $topic, fn( \Laravel\Scout\Builder $query ) => $query->where( 'topic_id', $topic->id ) );
+            }
+            else
+            {
+                $posts = Post::with( [ 'user', 'topic' ] )
+                             ->when( $topic, fn( Builder $query ) => $query->whereBelongsTo( $topic ) )
+                             ->latest()
+                             ->latest( 'id' );
+            }
             return inertia( 'Posts/Index', [
                 'posts'         => PostResource::collection( $posts ),
                 'topics'        => fn() => TopicResource::collection( Topic::all() ),
