@@ -1,10 +1,45 @@
 <?php
 
+/**
+ * Policy class to define authorization logic for the Post model.
+ * Determines access for basic CRUD operations and advanced actions like restore and force delete.
+ */
+
 namespace App\Policies;
 
-use App\Models\Post;
-use App\Models\User;
+use /**
+ * Class Post
+ *
+ * This model represents the "Post" entity in the application.
+ * It interacts with the `posts` table in the MySQL database.
+ * The Post model is used to manage and manipulate posts data,
+ * including retrieving, creating, updating, and deleting posts.
+ *
+ * Features:
+ * - Eloquent ORM is used for query handling.
+ * - Laravel relationships can be defined for associations with other models.
+ * - Attributes can be cast to specific data types if necessary.
+ *
+ * Note:
+ * Ensure the database connection configuration in the application is correctly set to `mysql`.
+ */
+    App\Models\Post;
+use /**
+ * The User model represents a user entity in the application.
+ *
+ * This model interacts with the 'users' table in the MySQL database and
+ * is used for authentication, authorization, and other user-specific functionality.
+ *
+ * It may include relationships, accessors, mutators, and other model-related logic
+ * to facilitate the handling of user data.
+ *
+ * Queue connection: sync
+ */
+    App\Models\User;
 
+/**
+ *
+ */
 class PostPolicy
 {
     /**
