@@ -9,6 +9,7 @@
 
 namespace App\Http\Resources;
 
+    use App\Models\Like;
     use /**
      * Class Number
      *
@@ -70,6 +71,17 @@ namespace App\Http\Resources;
     class PostResource extends JsonResource
     {
         /**
+         * @var true
+         */
+        private bool $withLikePermission = false;
+
+        public function withLikePermission(): self
+        {
+            $this->withLikePermission = true;
+            return $this;
+        }
+
+        /**
          * Transform the resource into an array.
          *
          * @return array<string, mixed>
@@ -88,6 +100,9 @@ namespace App\Http\Resources;
                 'created_at'  => $this->created_at,
                 'routes'      => [
                     'show' => $this->showRoute(),
+                ],
+                'can'         => [
+                    'like' => $this->when( $this->withLikePermission, fn() => $request->user()?->can( 'create', [ Like::class, $this->resource ] ) ),
                 ],
             ];
         }

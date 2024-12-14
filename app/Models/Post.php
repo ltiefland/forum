@@ -136,6 +136,7 @@ namespace App\Models;
      * designed to support advanced string handling operations.
      */
         Illuminate\Support\Str;
+    use Laravel\Scout\Searchable;
 
     /**
      *
@@ -143,7 +144,7 @@ namespace App\Models;
     class Post extends Model
     {
         use ConvertsMarkdownToHtml;
-        use HasFactory;
+        use HasFactory, Searchable;
 
         /**
          *

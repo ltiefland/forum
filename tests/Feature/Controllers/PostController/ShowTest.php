@@ -22,7 +22,7 @@
         $post->load( 'user', 'topic' );
 
         get( $post->showRoute() )
-            ->assertHasResource( 'post', PostResource::make( $post ) );
+            ->assertHasResource( 'post', PostResource::make( $post )->withLikePermission() );
     } );
 
     it( 'passes comments to the view', function ()
@@ -32,11 +32,14 @@
 
         $comments->load( 'user' );
 
+        $expectedResource = CommentResource::collection( $comments->reverse() );
+        $expectedResource->collection->transform( fn( CommentResource $resource ) => $resource->withLikePermission() );
+
         get( $post->showRoute() )
-            ->assertHasPaginatedResource( 'comments', CommentResource::collection( $comments->reverse() ) );
+            ->assertHasPaginatedResource( 'comments', $expectedResource );
     } );
 
-    it( 'will redirect if the slug is incorrect', function (string $incorrectSlug )
+    it( 'will redirect if the slug is incorrect', function ( string $incorrectSlug )
     {
         $post = Post::factory()->create( [ 'title' => 'Hello world' ] );
 

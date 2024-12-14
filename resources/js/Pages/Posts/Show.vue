@@ -11,6 +11,16 @@
             >
             <div class="mt-4">
                 <span>{{ post.likes_count }} likes</span>
+                <div v-if="$page.props.auth.user" class="mt-2">
+                    <Link v-if="post.can.like" :href="route('likes.store',['post',post.id])" method="post" class="inline-block bg-indigo-600 hover:bg-pink-500 transition-colors text-white py-1.5 px-3 rounded-full">
+                        <HandThumbUpIcon class="size-4 inline-block mr-1"/>
+                        Like post
+                    </Link>
+                    <Link v-else :href="route('likes.destroy',['post',post.id])" method="delete" class="inline-block bg-indigo-600 hover:bg-pink-500 transition-colors text-white py-1.5 px-3 rounded-full">
+                        <HandThumbDownIcon class="size-4 inline-block mr-1"/>
+                        Unlike post
+                    </Link>
+                </div>
             </div>
             <article
                 class="prose prose-sm mt-6 max-w-none"
@@ -88,22 +98,20 @@
 <script setup>
 import AppLayout from "@/Layouts/AppLayout.vue";
 import { computed, ref } from "vue";
-import { formatDistance, parseISO } from "date-fns";
 import Container from "@/Components/Container.vue";
 import Pagination from "@/Components/Pagination.vue";
 import { relativeDate } from "@/Utilities/date.js";
 import Comment from "@/Components/Comment.vue";
 import InputLabel from "@/Components/InputLabel.vue";
-import TextInput from "@/Components/TextInput.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
-import { router, useForm, Head } from "@inertiajs/vue3";
-import TextArea from "@/Components/TextArea.vue";
+import { router, useForm, Head, Link } from "@inertiajs/vue3";
 import InputError from "@/Components/InputError.vue";
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import { useConfirm } from "@/Utilities/Composables/useConfirm.js";
 import MarkdownEditor from "@/Components/MarkdownEditor.vue";
 import PageHeading from "@/Pages/Posts/PageHeading.vue";
 import Pill from "@/Pages/Posts/Pill.vue";
+import {HandThumbUpIcon, HandThumbDownIcon} from "@heroicons/vue/20/solid/esm/index.js";
 
 const props = defineProps(["post", "comments"]);
 

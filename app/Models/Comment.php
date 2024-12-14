@@ -102,6 +102,7 @@ use /**
  *   where the 'comments' table includes columns like 'commentable_type' and 'commentable_id'.
  */
     Illuminate\Database\Eloquent\Relations\MorphMany;
+use Laravel\Scout\Searchable;
 
 /**
  *
@@ -109,7 +110,7 @@ use /**
 class Comment extends Model
 {
     use ConvertsMarkdownToHtml;
-    use HasFactory;
+    use HasFactory, Searchable;
 
     /**
      *

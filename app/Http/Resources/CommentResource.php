@@ -17,6 +17,7 @@
 
 namespace App\Http\Resources;
 
+    use App\Models\Like;
     use /**
      * Class Request
      *
@@ -80,6 +81,17 @@ namespace App\Http\Resources;
     class CommentResource extends JsonResource
     {
         /**
+         * @var true
+         */
+        private bool $withLikePermission = false;
+
+        public function withLikePermission(): self
+        {
+            $this->withLikePermission = true;
+            return $this;
+        }
+
+        /**
          * Transform the resource into an array.
          *
          * @return array<string, mixed>
@@ -98,6 +110,7 @@ namespace App\Http\Resources;
                 'can'         => [
                     'update' => $request->user()?->can( 'update', $this->resource ),
                     'delete' => $request->user()?->can( 'delete', $this->resource ),
+                    'like'   => $this->when( $this->withLikePermission, fn() => $request->user()?->can( 'create', [ Like::class, $this->resource ] ) ),
                 ],
             ];
         }
